@@ -1,0 +1,53 @@
+# ==============================================================================
+# Huawei HCIA-AI V4.0 Certification Repository - .gitignore
+# Ensures high performance, lightweight cloning, and clean repository state
+# ==============================================================================
+
+# Unlocked legacy files (Keep local only)
+*_unlocked.pdf
+
+# Large media files (Recordings, Video dumps)
+*.mp4
+*.m4a
+*.mp3
+*.wav
+*.avi
+*.mkv
+
+# Pre-trained deep learning weights & model checkpoints (>50MB)
+*.pth
+*.pt
+*.ckpt
+*.h5
+*.onnx
+*.bin
+*.model
+
+# Heavy raw image datasets & archives (>100MB)
+flower_photos_train/
+flower_photos_test/
+flower_photos/
+*.gz
+*.tar
+*.zip
+
+# Browser HTML dumps and cached meeting assets
+meetings/
+*_files/
+*.html.download
+
+# Python bytecode and Jupyter checkpoints
+__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints/
+
+# Operating system and temporary files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+*.tmp
+*.log
+*.bak

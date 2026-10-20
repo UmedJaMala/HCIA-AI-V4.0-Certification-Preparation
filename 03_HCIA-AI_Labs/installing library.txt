@@ -1,0 +1,8 @@
+create an Environment in conda command prompt write: conda create –n Environment name python==x.x
+enter y  in all stuations
+Activating a your virtual Environment write: activate environment name
+to deactivate write: conda deactivate  
+Installing Tool Libraries:
+1.Installing PyTorch: Visit https://pytorch.org/get-started/locally/ to obtain the installation command. 
+2.Installing all necessary libraries, wirte : pip install numpy pandas matplotlib scikit-learn pydotplus graphviz download requests openai jupyter 
+3. and install tis tool with writting: pip install easydict

@@ -1,0 +1,14 @@
+sunny	hot	high	weak	N
+sunny	hot	high	strong	N
+cloudy	hot	high	weak	Y
+rain	moderate	high	weak	Y
+rain	cold	normal	weak	Y
+rain	cold	normal	strong	N
+cloudy	cold	normal	strong	Y
+sunny	moderate	high	weak	N
+sunny	cold	normal	weak	Y
+rain	moderate	normal	weak	Y
+sunny	moderate	normal	strong	Y
+cloudy	moderate	high	strong	Y
+cloudy	hot	normal	weak	Y
+rain	moderate	high	strong	N
