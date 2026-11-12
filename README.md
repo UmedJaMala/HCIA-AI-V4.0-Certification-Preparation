@@ -5,9 +5,9 @@
   <a href="https://e.huawei.com/en/talent/#/cert/product-details?target=qualification&badgeId=0&qualificationId=399"><img src="https://img.shields.io/badge/Certification-Huawei_HCIA--AI_V4.0-1F2937?style=flat&logo=huawei&logoColor=EF4444" alt="Certification: Huawei HCIA-AI V4.0" /></a>
   <a href="https://e.huawei.com/en/talent/"><img src="https://img.shields.io/badge/Exam_Code-H13--311-1F2937?style=flat&logo=target&logoColor=38BDF8" alt="Exam Code: H13-311" /></a>
   <a href="./02_Question_Banks/"><img src="https://img.shields.io/badge/Question_Bank-900_Items-1F2937?style=flat&logo=gitbook&logoColor=10B981" alt="Question Bank: 900 Items" /></a>
-  <a href="./01_Code_Mastery_Guide/"><img src="https://img.shields.io/badge/Code_Guide-40_Syntax_Blanks-1F2937?style=flat&logo=python&logoColor=38BDF8" alt="Code Guide: 40 Syntax Blanks" /></a>
+  <a href="./01_Code_Mastery_Guide/"><img src="https://img.shields.io/badge/Code_Guide-50_Syntax_%26_Multi--Blank-1F2937?style=flat&logo=python&logoColor=38BDF8" alt="Code Guide: 50 Syntax & Multi-Blank" /></a>
   <a href="./03_HCIA-AI_Labs/"><img src="https://img.shields.io/badge/GullNas_Vision-PyTorch_ResNet50-1F2937?style=flat&logo=pytorch&logoColor=EE4C2C" alt="GullNas Vision: PyTorch ResNet50" /></a>
-  <a href="https://github.com/UmedJaMala/HCIA-AI-V4.0-Certification-Preparation/releases"><img src="https://img.shields.io/badge/Release-v1.0.0-1F2937?style=flat&logo=git&logoColor=A855F7" alt="Release: v1.0.0" /></a>
+  <a href="https://github.com/UmedJaMala/HCIA-AI-V4.0-Certification-Preparation/releases"><img src="https://img.shields.io/badge/Release-v1.1.0-1F2937?style=flat&logo=git&logoColor=A855F7" alt="Release: v1.1.0" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-1F2937?style=flat&logo=opensourceinitiative&logoColor=94A3B8" alt="License: MIT" /></a>
 </p>
 
@@ -61,7 +61,7 @@ Covers Python, MindSpore, TensorFlow, and PyTorch syntax frequently tested in fi
 
 | Document | Description | Direct Download (PDF) | Repository View |
 | :--- | :--- | :---: | :---: |
-| **Code Writing Mastery Guide** | 40 rigorous coding blanks covering data pipelines, tensor transformations, neural net architecture, and evaluation metrics with full solutions. | <a href="https://raw.githubusercontent.com/UmedJaMala/HCIA-AI-V4.0-Certification-Preparation/main/01_Code_Mastery_Guide/HCIA-AI_V4.0_Code_Writing_Fill_in_the_Blank_Mastery_Guide.pdf"><img src="https://img.shields.io/badge/Download_PDF-0284C7?style=flat" alt="Download PDF" /></a> | <a href="./01_Code_Mastery_Guide/HCIA-AI_V4.0_Code_Writing_Fill_in_the_Blank_Mastery_Guide.pdf"><img src="https://img.shields.io/badge/View_in_Repo-181717?style=flat&logo=github&logoColor=white" alt="View in Repo" /></a> |
+| **Code Writing Mastery Guide** | 50 rigorous single and multi-blank coding & matrix questions covering PyTorch LeNet, CNN math, Model File formats (.ckpt/.pth/.onnx), MindSpore, and Scikit-Learn with full solutions. | <a href="https://raw.githubusercontent.com/UmedJaMala/HCIA-AI-V4.0-Certification-Preparation/main/01_Code_Mastery_Guide/HCIA-AI_V4.0_Code_Writing_Fill_in_the_Blank_Mastery_Guide.pdf"><img src="https://img.shields.io/badge/Download_PDF-0284C7?style=flat" alt="Download PDF" /></a> | <a href="./01_Code_Mastery_Guide/HCIA-AI_V4.0_Code_Writing_Fill_in_the_Blank_Mastery_Guide.pdf"><img src="https://img.shields.io/badge/View_in_Repo-181717?style=flat&logo=github&logoColor=white" alt="View in Repo" /></a> |
 | **Student Answer Sheets (Printable)** | 10-page printable answer grid with self-grading checkboxes for timing and scoring all 9 practice modules. | <a href="https://raw.githubusercontent.com/UmedJaMala/HCIA-AI-V4.0-Certification-Preparation/main/01_Code_Mastery_Guide/HCIA-AI_V4.0_Student_Answer_Sheets_Printable.pdf"><img src="https://img.shields.io/badge/Download_PDF-0284C7?style=flat" alt="Download PDF" /></a> | <a href="./01_Code_Mastery_Guide/HCIA-AI_V4.0_Student_Answer_Sheets_Printable.pdf"><img src="https://img.shields.io/badge/View_in_Repo-181717?style=flat&logo=github&logoColor=white" alt="View in Repo" /></a> |
 
 ---
@@ -69,7 +69,7 @@ Covers Python, MindSpore, TensorFlow, and PyTorch syntax frequently tested in fi
 <a id="question-banks"></a>
 ## 02. Question Banks (`02_Question_Banks/`)
 
-Contains **900 categorized, verified questions** across 6 curriculum modules and 3 comprehensive mock exams.
+Contains **900 categorized, rigorously audited questions (v1.1)** across 6 curriculum modules and 3 comprehensive mock exams.
 
 ### Master Editions (All 900 Questions in Single Volume)
 - `SOLVED` &nbsp; **Master Solved Direct Answers Edition (180 Pages)** &nbsp; <a href="https://raw.githubusercontent.com/UmedJaMala/HCIA-AI-V4.0-Certification-Preparation/main/02_Question_Banks/HCIA-AI_V4.0_Master_Question_Bank_Solved_Direct_Answers_900Q.pdf"><img src="https://img.shields.io/badge/Download_PDF-0284C7?style=flat" alt="Download PDF" /></a> <a href="./02_Question_Banks/HCIA-AI_V4.0_Master_Question_Bank_Solved_Direct_Answers_900Q.pdf"><img src="https://img.shields.io/badge/View_in_Repo-181717?style=flat&logo=github&logoColor=white" alt="View in Repo" /></a>  
