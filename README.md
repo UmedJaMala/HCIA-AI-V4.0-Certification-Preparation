@@ -12,6 +12,7 @@
 </p>
 
 <p align="left">
+  <a href="#simulator"><img src="https://img.shields.io/badge/Exam_Simulator-10B981?style=flat&logo=terminal&logoColor=white" alt="Exam Simulator" /></a>
   <a href="#overview"><img src="https://img.shields.io/badge/Overview-21262D?style=flat" alt="Overview" /></a>
   <a href="#structure"><img src="https://img.shields.io/badge/Structure-21262D?style=flat" alt="Structure" /></a>
   <a href="#code-guide"><img src="https://img.shields.io/badge/Code_Guide-21262D?style=flat" alt="Code Guide" /></a>
@@ -42,6 +43,7 @@ The entire repository is structured into **4 dedicated, numbered directories** f
 
 ```text
 HCIA-AI/
+├── take_exam.py                 <- 🚀 Interactive Pearson VUE Exam Simulator (Terminal CBT)
 ├── 01_Code_Mastery_Guide/       <- Code writing workbook & printable answer sheets
 ├── 02_Question_Banks/           <- Complete 900Q master editions + modular subfolder
 │   ├── HCIA-AI_V4.0_Master_Question_Bank_Solved_Direct_Answers_900Q.pdf
@@ -51,6 +53,27 @@ HCIA-AI/
 ├── 03_HCIA-AI_Labs/             <- Hands-on Jupyter notebooks, datasets & GullNas web app
 └── 04_Course_Materials/         <- Official curriculum PDFs & high-yield study notes
 ```
+
+---
+
+<a id="simulator"></a>
+## 🚀 Interactive Pearson VUE Exam Simulator (`take_exam.py`)
+
+A full-featured, interactive computer-based test (CBT) simulator designed to run directly in your terminal. It authentically replicates the **Pearson VUE testing engine** with live 90-minute countdown, question interleaving, bookmarking/flagging, and diagnostic scoring:
+
+```bash
+python take_exam.py
+```
+
+### 🎯 Simulator Modes & Features:
+* **Dynamic Randomization:** Generates a completely fresh, shuffled 60-question examination set every time you launch it.
+* **Dual Difficulty Tiers:**
+  * **[1] Standard Exam (ئاستی مامناوەند - Moderate 60Q):** Balanced sampling across all 6 curriculum modules (60Q · 1000 Points · 90-Minute limit).
+  * **[2] Hard & Tricky Exam (ئاستی قورس و تریکی - Scenario & Calculation Focus):** High-yield engineering scenarios featuring *John*, CNN dimension tracing ($X=[8,3,100,100] \to [8,32,48,48]$), LoRA 500-domain fine-tuning, and deceptive Pearson traps.
+  * **[3] Real Exam Recall Drill:** Exact 60 questions from authentic recent exam test-takers with verified derivations.
+  * **[4] Quick Practice Sprint:** 15 mixed questions for rapid 20-minute daily review sessions.
+* **Authentic Pearson VUE Navigation:** Flag for review (`F`), skip, back, review grid (`R`), and jump to unanswered items.
+* **Diagnostic Score Report:** Evaluates your total score against the official passing threshold (**600 / 1000 Points**), displays visual mastery bars per module, and lets you review every missed item with its verified answer and official slide citation.
 
 ---
 
