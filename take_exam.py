@@ -169,9 +169,9 @@ def run_exam_session(questions, mode_title, time_limit_minutes=90):
         # Determine Difficulty Tier Label
         diff = q.get('difficulty', 'moderate')
         if diff == 'tricky':
-            tier_badge = f"{Colors.MAGENTA}[Level: Hard & Tricky / قورس و تریکی]{Colors.RESET}"
+            tier_badge = f"{Colors.MAGENTA}[Level: Hard & Tricky]{Colors.RESET}"
         else:
-            tier_badge = f"{Colors.BLUE}[Level: Moderate / مامناوەند]{Colors.RESET}"
+            tier_badge = f"{Colors.BLUE}[Level: Moderate]{Colors.RESET}"
             
         flag_status = f"{Colors.YELLOW}[★ FLAGGED FOR REVIEW]{Colors.RESET}" if flagged[current_idx] else ""
         
@@ -430,10 +430,10 @@ def generate_score_report(questions, user_answers, mode_title, elapsed):
     # Score Banner
     if is_passed:
         cprint(f"  FINAL SCORE: {earned_pts} / {max_pts} Points  ({pct:.1f}%)", Colors.GREEN, bold=True)
-        cprint("  VERDICT:     CONGRATULATIONS! YOU PASSED (دەرچوویت)", Colors.GREEN, bold=True)
+        cprint("  VERDICT:     CONGRATULATIONS! YOU PASSED", Colors.GREEN, bold=True)
     else:
         cprint(f"  FINAL SCORE: {earned_pts} / {max_pts} Points  ({pct:.1f}%)", Colors.RED, bold=True)
-        cprint("  VERDICT:     DID NOT PASS - RETAKE RECOMMENDED (کەوتوویت - پێویستت بە پێداچوونەوەیە)", Colors.RED, bold=True)
+        cprint("  VERDICT:     DID NOT PASS - RETAKE RECOMMENDED", Colors.RED, bold=True)
         pts_needed = 600 - earned_pts
         cprint(f"  Gap to Pass: You need {pts_needed} more points to reach the 600-point threshold.", Colors.YELLOW)
         
@@ -441,25 +441,25 @@ def generate_score_report(questions, user_answers, mode_title, elapsed):
     print()
     
     # Difficulty Tier Breakdown
-    cprint("Performance by Difficulty Level (ئاستی قورسی):", Colors.BOLD)
+    cprint("Performance by Difficulty Level:", Colors.BOLD)
     mod_stat = difficulty_stats['moderate']
     tri_stat = difficulty_stats['tricky']
     mod_pct = (mod_stat['correct'] / mod_stat['count']) * 100 if mod_stat['count'] > 0 else 0
     tri_pct = (tri_stat['correct'] / tri_stat['count']) * 100 if tri_stat['count'] > 0 else 0
     
-    print(f"  • Moderate Level (ئاستی مامناوەند)   : {mod_stat['correct']:>2}/{mod_stat['count']:<2} correct ({mod_pct:>5.1f}%) | {mod_stat['earned']}/{mod_stat['total']} pts")
-    print(f"  • Hard & Tricky Level (ئاستی قورس)  : {tri_stat['correct']:>2}/{tri_stat['count']:<2} correct ({tri_pct:>5.1f}%) | {tri_stat['earned']}/{tri_stat['total']} pts")
+    print(f"  • Moderate Level   : {mod_stat['correct']:>2}/{mod_stat['count']:<2} correct ({mod_pct:>5.1f}%) | {mod_stat['earned']}/{mod_stat['total']} pts")
+    print(f"  • Hard & Tricky Level  : {tri_stat['correct']:>2}/{tri_stat['count']:<2} correct ({tri_pct:>5.1f}%) | {tri_stat['earned']}/{tri_stat['total']} pts")
     print()
     
     # Question Type Performance
-    cprint("Performance by Question Type (جۆری پرسیار):", Colors.BOLD)
+    cprint("Performance by Question Type:", Colors.BOLD)
     for qtype, s in type_stats.items():
         type_pct = (s['correct'] / s['count']) * 100 if s['count'] > 0 else 0
         print(f"  • {qtype:<28} : {s['correct']}/{s['count']} correct ({type_pct:.1f}%)")
     print()
     
     # Module Breakdown
-    cprint("Performance by Curriculum Module (مۆدیوڵەکان):", Colors.BOLD)
+    cprint("Performance by Curriculum Module:", Colors.BOLD)
     for mod, s in module_stats.items():
         m_pct = (s['earned'] / s['total']) * 100 if s['total'] > 0 else 0
         bar = "█" * int(m_pct // 10) + "░" * (10 - int(m_pct // 10))
@@ -504,7 +504,7 @@ def review_missed_questions(incorrect_list):
     print()
     
     for item in incorrect_list:
-        tier_str = "Hard & Tricky (قورس)" if item.get('difficulty') == 'tricky' else "Moderate (مامناوەند)"
+        tier_str = "Hard & Tricky" if item.get('difficulty') == 'tricky' else "Moderate"
         cprint(f"Question #{item['num']} • {item['module']} • [{tier_str}] ({item['points']} Points)", Colors.YELLOW, bold=True)
         print(f"Prompt: {item['question']}")
         print()
@@ -544,8 +544,8 @@ def save_report_file(questions, user_answers, earned_pts, max_pts, pct, is_passe
         tri_stat = difficulty_stats['tricky']
         mod_pct = (mod_stat['correct'] / mod_stat['count']) * 100 if mod_stat['count'] > 0 else 0
         tri_pct = (tri_stat['correct'] / tri_stat['count']) * 100 if tri_stat['count'] > 0 else 0
-        f.write(f"  • Moderate Level (مامناوەند)  : {mod_stat['correct']}/{mod_stat['count']} correct ({mod_pct:.1f}%) | {mod_stat['earned']}/{mod_stat['total']} pts\n")
-        f.write(f"  • Hard & Tricky Level (قورس) : {tri_stat['correct']}/{tri_stat['count']} correct ({tri_pct:.1f}%) | {tri_stat['earned']}/{tri_stat['total']} pts\n\n")
+        f.write(f"  • Moderate Level  : {mod_stat['correct']}/{mod_stat['count']} correct ({mod_pct:.1f}%) | {mod_stat['earned']}/{mod_stat['total']} pts\n")
+        f.write(f"  • Hard & Tricky Level : {tri_stat['correct']}/{tri_stat['count']} correct ({tri_pct:.1f}%) | {tri_stat['earned']}/{tri_stat['total']} pts\n\n")
         
         f.write("Performance by Curriculum Module:\n")
         for mod, s in module_stats.items():
@@ -583,17 +583,17 @@ def main():
         print()
         cprint("Select Examination Mode:", Colors.BOLD)
         print()
-        print("  [1] Official Real Exam Simulation (تاقیکردنەوەی تەواو • تێکەڵەی مامناوەند و قورس لە یەک تاقیکردنەوەدا)")
+        print("  [1] Official Real Exam Simulation (Combines Moderate & Hard/Tricky in ONE Exam)")
         print("      • 60 randomized questions combining BOTH Moderate & Hard/Tricky questions in ONE exam:")
         print("        - 30 Moderate questions (core concepts, definitions, foundational ML/DL)")
         print("        - 30 Hard & Tricky questions (John scenarios, calculations, CNN shapes, LoRA fine-tuning)")
         print("      • Exact 1000 points scoring • 90-minute live countdown timer")
         print()
-        print("  [2] Real Exam Recall Drill (تاقیکردنەوەی تایبەتی پرسیارە ڕاستەقینەکانی تاقیکردنەوە)")
+        print("  [2] Real Exam Recall Drill (Authentic Pearson VUE Exam Recalls)")
         print("      • Authentic 60 questions directly recalled from recent Pearson VUE test-takers")
         print("      • Step-by-step derivations and official slide citations included")
         print()
-        print("  [3] Quick Practice Sprint (تاقیکردنەوەی خێرای ١٥ پرسیاری)")
+        print("  [3] Quick Practice Sprint (15 Mixed Questions)")
         print("      • 15 mixed questions (Moderate + Tricky) for rapid 20-minute daily review sessions")
         print()
         print("  [Q] Exit Simulator")

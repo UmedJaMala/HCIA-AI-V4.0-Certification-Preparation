@@ -6,25 +6,25 @@ with open(notebook_path, 'r', encoding='utf-8') as f:
     nb = json.load(f)
 
 cfg_cell_code = """cfg = edict({
-    'data_path': './flower_photos_train/flower_photos_train', # ڕاڕەوی داتای مەشقپێکردن
-    'test_path': './flower_photos_test/flower_photos_test',   # ڕاڕەوی داتای تاقیکردنەوە
+    'data_path': './flower_photos_train/flower_photos_train', # Path to training dataset
+    'test_path': './flower_photos_test/flower_photos_test',   # Path to test dataset
     'data_size': 3616,
-    'HEIGHT': 224,                              # بەرزی وێنە
-    'WIDTH': 224,                               # پانی وێنە
-    '_R_MEAN': 123.68,                          # بەهاکانی ناوەند بۆ ڕەنگەکان
+    'HEIGHT': 224,                              # Image height
+    'WIDTH': 224,                               # Image width
+    '_R_MEAN': 123.68,                          # Mean color normalization values
     '_G_MEAN': 116.78,
     '_B_MEAN': 103.94,
-    '_R_STD': 1.0,                              # بەهای لادانی پێوانەیی
+    '_R_STD': 1.0,                              # Standard deviation value
     '_G_STD': 1.0,
     '_B_STD': 1.0,
     '_RESIZE_SIDE_MIN': 256,
     '_RESIZE_SIDE_MAX': 512,
-    'batch_size': 16,                           # قەبارەی باچ (گونجێنراو بۆ GPU)
-    'num_class': 5,                             # ژمارەی پۆلەکانی گوڵ
-    'epoch_size': 5,                            # ژمارەی خولەکانی ڕاهێنان
-    'num_workers': 0,                           # ژمارەی worker
-    'device': 'cuda' if torch.cuda.is_available() else 'cpu', # کارکردن لەسەر GPU (NVIDIA RTX 5060)
-    'prefix': 'resnet50.pth',                   # ناوی فایلی پاشەکەوتکردنی مۆدێلەکە
+    'batch_size': 16,                           # Batch size (optimized for GPU)
+    'num_class': 5,                             # Number of flower classes
+    'epoch_size': 5,                            # Number of training epochs
+    'num_workers': 0,                           # Number of workers
+    'device': 'cuda' if torch.cuda.is_available() else 'cpu', # Compute device (GPU / CPU)
+    'prefix': 'resnet50.pth',                   # Model checkpoint output filename
 })"""
 
 for cell in nb['cells']:

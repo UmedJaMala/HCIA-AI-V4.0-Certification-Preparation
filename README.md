@@ -67,8 +67,8 @@ python take_exam.py
 
 ### 🎯 Simulator Modes & Features:
 * **Dynamic Randomization:** Generates a completely fresh, shuffled 60-question examination set every time you launch it.
-* **Unified Dual-Difficulty Exam (تێکەڵەی هەردوو ئاستی مامناوەند و قورس لە یەک تاقیکردنەوەدا):**
-  * **[1] Official Real Exam Simulation (تاقیکردنەوەی تەواو):** Integrates **BOTH** difficulty tiers into a single authentic 60-question Pearson VUE exam:
+* **Unified Dual-Difficulty Examination:**
+  * **[1] Official Real Exam Simulation:** Integrates **BOTH** difficulty tiers into a single authentic 60-question Pearson VUE exam:
     * **30 Moderate Questions:** Foundational definitions, standard ML/DL concepts, and curriculum core items.
     * **30 Hard & Tricky Questions:** Authentic engineering scenarios featuring *John*, CNN dimension calculations ($X=[8,3,100,100] \to [8,32,48,48]$), LoRA 500-domain fine-tuning, and deceptive Pearson VUE traps.
     * **Timing & Scoring:** Exact 1000 Points · 90-Minute countdown timer · Official pass threshold: 600 / 1000 Points.
