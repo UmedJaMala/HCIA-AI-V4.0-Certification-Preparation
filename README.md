@@ -67,11 +67,13 @@ python take_exam.py
 
 ### 🎯 Simulator Modes & Features:
 * **Dynamic Randomization:** Generates a completely fresh, shuffled 60-question examination set every time you launch it.
-* **Dual Difficulty Tiers:**
-  * **[1] Standard Exam (ئاستی مامناوەند - Moderate 60Q):** Balanced sampling across all 6 curriculum modules (60Q · 1000 Points · 90-Minute limit).
-  * **[2] Hard & Tricky Exam (ئاستی قورس و تریکی - Scenario & Calculation Focus):** High-yield engineering scenarios featuring *John*, CNN dimension tracing ($X=[8,3,100,100] \to [8,32,48,48]$), LoRA 500-domain fine-tuning, and deceptive Pearson traps.
-  * **[3] Real Exam Recall Drill:** Exact 60 questions from authentic recent exam test-takers with verified derivations.
-  * **[4] Quick Practice Sprint:** 15 mixed questions for rapid 20-minute daily review sessions.
+* **Unified Dual-Difficulty Exam (تێکەڵەی هەردوو ئاستی مامناوەند و قورس لە یەک تاقیکردنەوەدا):**
+  * **[1] Official Real Exam Simulation (تاقیکردنەوەی تەواو):** Integrates **BOTH** difficulty tiers into a single authentic 60-question Pearson VUE exam:
+    * **30 Moderate Questions:** Foundational definitions, standard ML/DL concepts, and curriculum core items.
+    * **30 Hard & Tricky Questions:** Authentic engineering scenarios featuring *John*, CNN dimension calculations ($X=[8,3,100,100] \to [8,32,48,48]$), LoRA 500-domain fine-tuning, and deceptive Pearson VUE traps.
+    * **Timing & Scoring:** Exact 1000 Points · 90-Minute countdown timer · Official pass threshold: 600 / 1000 Points.
+  * **[2] Real Exam Recall Drill:** Exact 60 questions from authentic recent exam test-takers with verified derivations and slide citations.
+  * **[3] Quick Practice Sprint:** 15 mixed questions (Moderate + Tricky) for rapid 20-minute daily review sessions.
 * **Authentic Pearson VUE Navigation:** Flag for review (`F`), skip, back, review grid (`R`), and jump to unanswered items.
 * **Diagnostic Score Report:** Evaluates your total score against the official passing threshold (**600 / 1000 Points**), displays visual mastery bars per module, and lets you review every missed item with its verified answer and official slide citation.
 

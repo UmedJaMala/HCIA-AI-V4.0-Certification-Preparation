@@ -4,6 +4,7 @@
 ================================================================================
 🎓 HUAWEI HCIA-AI V4.0 (H13-311_V4.0) • OFFICIAL INTERACTIVE EXAM SIMULATOR
 Authentic Pearson VUE Testing Environment • 60 Questions • 1000 Points • 90 Minutes
+Integrates BOTH Moderate & Hard/Tricky Levels into One Single Comprehensive Exam
 Curated by: Umed Jamal Nouri • Release v1.3.0
 ================================================================================
 """
@@ -30,12 +31,13 @@ class Colors:
     GREEN = '\033[92m'
     YELLOW = '\033[93m'
     RED = '\033[91m'
+    MAGENTA = '\033[35m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
     DIM = '\033[2m'
     RESET = '\033[0m'
 
-# Disable colors if terminal doesn't support them
+# Enable Windows terminal ANSI colors
 if os.name == 'nt' and not os.environ.get('WT_SESSION') and not os.environ.get('ANSICON'):
     try:
         import ctypes
@@ -80,44 +82,40 @@ def normalize_answer(ans_str):
 
 def select_exam_questions(all_questions, mode):
     """
-    Selects and randomizes 60 questions based on chosen mode:
-    1: Moderate / Balanced Standard Exam (60Q)
-    2: Hard & Tricky Scenario Exam (60Q)
-    3: Authentic Real Exam Recall Drill (60Q)
-    4: Quick Sprint (15Q)
+    Selects and randomizes questions based on chosen mode:
+    1: Comprehensive Real Exam (Combines BOTH Moderate & Hard/Tricky in ONE exam - 60Q)
+    2: Real Exam Recall Drill (Authentic test-taker recall - 60Q)
+    3: Quick Practice Sprint (Mixed Moderate & Tricky - 15Q)
     """
     selected = []
     
     if mode == 1:
-        # Standard / Moderate: Balanced sampling across modules
+        # UNIFIED COMPREHENSIVE EXAM: Integrates both Moderate & Hard/Tricky in ONE exam!
+        # 30 Moderate questions (core definitions & standard concepts)
+        # 30 Hard & Tricky questions (scenarios with John, calculations, CNN shapes, LoRA fine-tuning, Pearson traps)
         moderate_pool = [q for q in all_questions if q.get('difficulty') == 'moderate']
         tricky_pool = [q for q in all_questions if q.get('difficulty') == 'tricky']
         random.shuffle(moderate_pool)
         random.shuffle(tricky_pool)
-        # 35 moderate + 25 tricky = 60
-        selected = moderate_pool[:35] + tricky_pool[:25]
+        
+        selected = moderate_pool[:30] + tricky_pool[:30]
         random.shuffle(selected)
         
     elif mode == 2:
-        # Hard & Tricky: High-yield scenarios, calculations, John questions, Pearson traps
-        tricky_pool = [q for q in all_questions if q.get('difficulty') == 'tricky']
-        random.shuffle(tricky_pool)
-        selected = tricky_pool[:60]
-        random.shuffle(selected)
-        
-    elif mode == 3:
-        # Real Exam Recall Drill: Exact 60 questions from Master 60Q recall
+        # Authentic Real Exam Recall Drill: Exact 60 questions from Master 60Q recall
         recall_pool = [q for q in all_questions if q.get('is_real_recall')]
         random.shuffle(recall_pool)
         selected = recall_pool[:60]
         
-    elif mode == 4:
-        # Quick Sprint: 15 mixed questions
-        pool = list(all_questions)
-        random.shuffle(pool)
-        selected = pool[:15]
+    elif mode == 3:
+        # Quick Practice Sprint: 15 questions (8 Moderate + 7 Hard/Tricky)
+        moderate_pool = [q for q in all_questions if q.get('difficulty') == 'moderate']
+        tricky_pool = [q for q in all_questions if q.get('difficulty') == 'tricky']
+        random.shuffle(moderate_pool)
+        random.shuffle(tricky_pool)
+        selected = moderate_pool[:8] + tricky_pool[:7]
+        random.shuffle(selected)
         
-    # Scale points so total is exactly 1000 points (or 250 points for 15Q sprint)
     num_q = len(selected)
     target_total = 1000 if num_q == 60 else 250
     base_pts = target_total // num_q
@@ -139,7 +137,7 @@ def select_exam_questions(all_questions, mode):
         
     final_questions = interleaved[:num_q]
     
-    # Assign point values
+    # Assign point values to match exact target points
     for idx, q in enumerate(final_questions):
         q_copy = dict(q)
         q_copy['exam_pts'] = base_pts + (1 if idx < remainder else 0)
@@ -168,12 +166,20 @@ def run_exam_session(questions, mode_title, time_limit_minutes=90):
         clear_screen()
         q = questions[current_idx]
         
-        # Header Bar
+        # Determine Difficulty Tier Label
+        diff = q.get('difficulty', 'moderate')
+        if diff == 'tricky':
+            tier_badge = f"{Colors.MAGENTA}[Level: Hard & Tricky / قورس و تریکی]{Colors.RESET}"
+        else:
+            tier_badge = f"{Colors.BLUE}[Level: Moderate / مامناوەند]{Colors.RESET}"
+            
         flag_status = f"{Colors.YELLOW}[★ FLAGGED FOR REVIEW]{Colors.RESET}" if flagged[current_idx] else ""
+        
+        # Header Bar
         cprint(f"==========================================================================================", Colors.CYAN)
         cprint(f"  HCIA-AI V4.0 EXAM SIMULATOR • {mode_title.upper()}", Colors.BOLD)
         cprint(f"  Question {current_idx + 1} of {total_q}  |  Points: {q['exam_pts']}  |  Time Remaining: {format_time(remaining)}  {flag_status}", Colors.CYAN)
-        cprint(f"  Module: {q.get('module', 'General AI')}  |  Type: {q.get('type', 'Standard')}", Colors.DIM)
+        cprint(f"  Module: {q.get('module', 'General AI')}  |  {tier_badge}  |  Type: {q.get('type', 'Standard')}", Colors.DIM)
         cprint(f"==========================================================================================", Colors.CYAN)
         print()
         
@@ -207,18 +213,22 @@ def run_exam_session(questions, mode_title, time_limit_minutes=90):
             if current_idx < total_q - 1:
                 current_idx += 1
             else:
-                current_idx = show_review_screen(questions, user_answers, flagged, remaining)
-                if current_idx == -1:
+                chosen_q = show_review_screen(questions, user_answers, flagged, remaining)
+                if chosen_q == -1:
                     break
+                else:
+                    current_idx = chosen_q
             continue
             
         if cmd == 'n':
             if current_idx < total_q - 1:
                 current_idx += 1
             else:
-                current_idx = show_review_screen(questions, user_answers, flagged, remaining)
-                if current_idx == -1:
+                chosen_q = show_review_screen(questions, user_answers, flagged, remaining)
+                if chosen_q == -1:
                     break
+                else:
+                    current_idx = chosen_q
         elif cmd == 'b':
             if current_idx > 0:
                 current_idx -= 1
@@ -239,7 +249,7 @@ def run_exam_session(questions, mode_title, time_limit_minutes=90):
             norm = normalize_answer(user_input)
             if norm:
                 user_answers[current_idx] = norm
-                # Auto-advance to next question if it's Single or True/False
+                # Auto-advance to next question if it's Single Choice or True/False
                 if q.get('type') in ['Single-Answer Question', 'True or False']:
                     if current_idx < total_q - 1:
                         current_idx += 1
@@ -284,16 +294,18 @@ def show_review_screen(questions, user_answers, flagged, remaining):
                 if idx < total_q:
                     ans = user_answers[idx]
                     is_flag = flagged[idx]
+                    diff_sym = "[T]" if questions[idx].get('difficulty') == 'tricky' else "[M]"
                     status_symbol = "[✓]" if ans else "[ ]"
                     flag_symbol = "★" if is_flag else " "
                     ans_label = f"({ans})" if ans else "(--)"
-                    col_text = f"Q{idx+1:02d} {flag_symbol}{status_symbol} {ans_label:<5}"
+                    col_text = f"Q{idx+1:02d} {flag_symbol}{status_symbol}{diff_sym} {ans_label:<5}"
                     line_str += f"{col_text:<28}"
             print(f"  {line_str}")
         print()
         cprint("------------------------------------------------------------------------------------------", Colors.DIM)
+        cprint("Legend: [M] Moderate Level  |  [T] Hard & Tricky Level  |  [✓] Answered  |  [★] Flagged", Colors.DIM)
         cprint("Commands:", Colors.BOLD)
-        print("  • Enter question number (1 - 60) to jump to that question")
+        print("  • Enter question number (1 - 60) to jump directly to that question")
         print("  • Enter 'U' to jump to first unanswered question")
         print("  • Enter 'F' to jump to first flagged question")
         print("  • Enter 'FINISH' to submit your exam and receive final diagnostic score report")
@@ -344,9 +356,13 @@ def generate_score_report(questions, user_answers, mode_title, elapsed):
     correct_count = 0
     incorrect_list = []
     
-    # Chapter breakdown tracking
+    # Tracking stats
     module_stats = {}
     type_stats = {}
+    difficulty_stats = {
+        'moderate': {'earned': 0, 'total': 0, 'correct': 0, 'count': 0},
+        'tricky': {'earned': 0, 'total': 0, 'correct': 0, 'count': 0}
+    }
     
     for idx, q in enumerate(questions):
         user_ans = user_answers[idx]
@@ -356,13 +372,19 @@ def generate_score_report(questions, user_answers, mode_title, elapsed):
         pts = q['exam_pts']
         mod = q.get('module', 'General')
         qtype = q.get('type', 'Standard')
+        diff = q.get('difficulty', 'moderate')
         
-        # Init stats
+        # Difficulty breakdown
+        difficulty_stats[diff]['total'] += pts
+        difficulty_stats[diff]['count'] += 1
+        
+        # Module breakdown
         if mod not in module_stats:
             module_stats[mod] = {'earned': 0, 'total': 0, 'correct': 0, 'count': 0}
         module_stats[mod]['total'] += pts
         module_stats[mod]['count'] += 1
         
+        # Type breakdown
         if qtype not in type_stats:
             type_stats[qtype] = {'correct': 0, 'count': 0}
         type_stats[qtype]['count'] += 1
@@ -370,6 +392,8 @@ def generate_score_report(questions, user_answers, mode_title, elapsed):
         if is_correct:
             earned_pts += pts
             correct_count += 1
+            difficulty_stats[diff]['earned'] += pts
+            difficulty_stats[diff]['correct'] += 1
             module_stats[mod]['earned'] += pts
             module_stats[mod]['correct'] += 1
             type_stats[qtype]['correct'] += 1
@@ -382,6 +406,7 @@ def generate_score_report(questions, user_answers, mode_title, elapsed):
                 'correct_ans': correct_ans,
                 'explanation': q.get('explanation', ''),
                 'module': mod,
+                'difficulty': diff,
                 'points': pts
             })
             
@@ -397,7 +422,7 @@ def generate_score_report(questions, user_answers, mode_title, elapsed):
     print(f"  Examination Mode:  {mode_title}")
     print(f"  Date & Time:       {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"  Time Elapsed:      {format_time(elapsed)}")
-    print(f"  Total Questions:   {total_q}")
+    print(f"  Total Questions:   {total_q} (Combines Moderate & Hard/Tricky Questions)")
     print(f"  Passing Score:     600 / 1000 Points (60.0%)")
     print()
     cprint("------------------------------------------------------------------------------------------", Colors.DIM)
@@ -415,20 +440,31 @@ def generate_score_report(questions, user_answers, mode_title, elapsed):
     cprint("------------------------------------------------------------------------------------------", Colors.DIM)
     print()
     
+    # Difficulty Tier Breakdown
+    cprint("Performance by Difficulty Level (ئاستی قورسی):", Colors.BOLD)
+    mod_stat = difficulty_stats['moderate']
+    tri_stat = difficulty_stats['tricky']
+    mod_pct = (mod_stat['correct'] / mod_stat['count']) * 100 if mod_stat['count'] > 0 else 0
+    tri_pct = (tri_stat['correct'] / tri_stat['count']) * 100 if tri_stat['count'] > 0 else 0
+    
+    print(f"  • Moderate Level (ئاستی مامناوەند)   : {mod_stat['correct']:>2}/{mod_stat['count']:<2} correct ({mod_pct:>5.1f}%) | {mod_stat['earned']}/{mod_stat['total']} pts")
+    print(f"  • Hard & Tricky Level (ئاستی قورس)  : {tri_stat['correct']:>2}/{tri_stat['count']:<2} correct ({tri_pct:>5.1f}%) | {tri_stat['earned']}/{tri_stat['total']} pts")
+    print()
+    
     # Question Type Performance
-    cprint("Performance by Question Type:", Colors.BOLD)
+    cprint("Performance by Question Type (جۆری پرسیار):", Colors.BOLD)
     for qtype, s in type_stats.items():
         type_pct = (s['correct'] / s['count']) * 100 if s['count'] > 0 else 0
         print(f"  • {qtype:<28} : {s['correct']}/{s['count']} correct ({type_pct:.1f}%)")
     print()
     
     # Module Breakdown
-    cprint("Performance by Curriculum Module:", Colors.BOLD)
+    cprint("Performance by Curriculum Module (مۆدیوڵەکان):", Colors.BOLD)
     for mod, s in module_stats.items():
-        mod_pct = (s['earned'] / s['total']) * 100 if s['total'] > 0 else 0
-        bar = "█" * int(mod_pct // 10) + "░" * (10 - int(mod_pct // 10))
-        color = Colors.GREEN if mod_pct >= 60 else Colors.RED
-        cprint(f"  • {mod:<45} [{bar}] {s['earned']:>3}/{s['total']:<3} pts ({mod_pct:>5.1f}%)", color)
+        m_pct = (s['earned'] / s['total']) * 100 if s['total'] > 0 else 0
+        bar = "█" * int(m_pct // 10) + "░" * (10 - int(m_pct // 10))
+        color = Colors.GREEN if m_pct >= 60 else Colors.RED
+        cprint(f"  • {mod:<45} [{bar}] {s['earned']:>3}/{s['total']:<3} pts ({m_pct:>5.1f}%)", color)
     print()
     
     # Post-Exam Options
@@ -437,7 +473,7 @@ def generate_score_report(questions, user_answers, mode_title, elapsed):
         print("Options:")
         print("  [1] Review Incorrect Questions with Detailed Explanations & Slide Citations")
         print("  [2] Save Diagnostic Score Report to Text File")
-        print("  [3] Retake Exam (Fresh Randomized Questions)")
+        print("  [3] Retake New Exam (Fresh Shuffled Questions)")
         print("  [Q] Exit Simulator")
         cprint("==========================================================================================", Colors.BLUE)
         
@@ -445,7 +481,7 @@ def generate_score_report(questions, user_answers, mode_title, elapsed):
         if rep_choice == '1':
             review_missed_questions(incorrect_list)
         elif rep_choice == '2':
-            save_report_file(questions, user_answers, earned_pts, max_pts, pct, is_passed, module_stats, type_stats, incorrect_list, mode_title)
+            save_report_file(questions, user_answers, earned_pts, max_pts, pct, is_passed, module_stats, type_stats, difficulty_stats, incorrect_list, mode_title)
         elif rep_choice == '3':
             main()
             return
@@ -468,7 +504,8 @@ def review_missed_questions(incorrect_list):
     print()
     
     for item in incorrect_list:
-        cprint(f"Question #{item['num']} • {item['module']} ({item['points']} Points)", Colors.YELLOW, bold=True)
+        tier_str = "Hard & Tricky (قورس)" if item.get('difficulty') == 'tricky' else "Moderate (مامناوەند)"
+        cprint(f"Question #{item['num']} • {item['module']} • [{tier_str}] ({item['points']} Points)", Colors.YELLOW, bold=True)
         print(f"Prompt: {item['question']}")
         print()
         print("Options:")
@@ -487,7 +524,7 @@ def review_missed_questions(incorrect_list):
         
     input("\nPress [Enter] to return to Score Report...")
 
-def save_report_file(questions, user_answers, earned_pts, max_pts, pct, is_passed, module_stats, type_stats, incorrect_list, mode_title):
+def save_report_file(questions, user_answers, earned_pts, max_pts, pct, is_passed, module_stats, type_stats, difficulty_stats, incorrect_list, mode_title):
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
     filename = f"HCIA_AI_Exam_Report_{timestamp}.txt"
     filepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), filename)
@@ -502,10 +539,18 @@ def save_report_file(questions, user_answers, earned_pts, max_pts, pct, is_passe
         f.write(f"Score:             {earned_pts} / {max_pts} Points ({pct:.1f}%)\n")
         f.write(f"Verdict:           {'PASS' if is_passed else 'FAIL'}\n\n")
         
+        f.write("Performance by Difficulty Level:\n")
+        mod_stat = difficulty_stats['moderate']
+        tri_stat = difficulty_stats['tricky']
+        mod_pct = (mod_stat['correct'] / mod_stat['count']) * 100 if mod_stat['count'] > 0 else 0
+        tri_pct = (tri_stat['correct'] / tri_stat['count']) * 100 if tri_stat['count'] > 0 else 0
+        f.write(f"  • Moderate Level (مامناوەند)  : {mod_stat['correct']}/{mod_stat['count']} correct ({mod_pct:.1f}%) | {mod_stat['earned']}/{mod_stat['total']} pts\n")
+        f.write(f"  • Hard & Tricky Level (قورس) : {tri_stat['correct']}/{tri_stat['count']} correct ({tri_pct:.1f}%) | {tri_stat['earned']}/{tri_stat['total']} pts\n\n")
+        
         f.write("Performance by Curriculum Module:\n")
         for mod, s in module_stats.items():
-            mod_pct = (s['earned'] / s['total']) * 100 if s['total'] > 0 else 0
-            f.write(f"  • {mod:<45} : {s['earned']:>3}/{s['total']:<3} pts ({mod_pct:>5.1f}%)\n")
+            m_pct = (s['earned'] / s['total']) * 100 if s['total'] > 0 else 0
+            f.write(f"  • {mod:<45} : {s['earned']:>3}/{s['total']:<3} pts ({m_pct:>5.1f}%)\n")
         f.write("\n")
         
         if incorrect_list:
@@ -538,49 +583,42 @@ def main():
         print()
         cprint("Select Examination Mode:", Colors.BOLD)
         print()
-        print("  [1] Standard Exam (ئاستی مامناوەند - Moderate 60Q Pearson VUE Simulation)")
-        print("      • 60 randomized questions balanced across all 6 official course modules")
-        print("      • Exact 1000 points scoring • 90-minute countdown timer")
+        print("  [1] Official Real Exam Simulation (تاقیکردنەوەی تەواو • تێکەڵەی مامناوەند و قورس لە یەک تاقیکردنەوەدا)")
+        print("      • 60 randomized questions combining BOTH Moderate & Hard/Tricky questions in ONE exam:")
+        print("        - 30 Moderate questions (core concepts, definitions, foundational ML/DL)")
+        print("        - 30 Hard & Tricky questions (John scenarios, calculations, CNN shapes, LoRA fine-tuning)")
+        print("      • Exact 1000 points scoring • 90-minute live countdown timer")
         print()
-        print("  [2] Hard & Tricky Exam (ئاستی قورس و تریکی - High-Yield Pearson VUE Traps & Scenarios)")
-        print("      • 60 high-difficulty scenario questions (John engineering scenarios, calculations,")
-        print("        CNN tensor shapes, LoRA 500-domain fine-tuning, and deceptive official traps)")
-        print("      • Exact 1000 points scoring • 90-minute countdown timer")
-        print()
-        print("  [3] Real Exam Recall Drill (تاقیکردنەوەی تایبەتی پرسیارە ڕاستەقینەکانی تاقیکردنەوە)")
+        print("  [2] Real Exam Recall Drill (تاقیکردنەوەی تایبەتی پرسیارە ڕاستەقینەکانی تاقیکردنەوە)")
         print("      • Authentic 60 questions directly recalled from recent Pearson VUE test-takers")
         print("      • Step-by-step derivations and official slide citations included")
         print()
-        print("  [4] Quick Practice Sprint (تاقیکردنەوەی خێرای ١٥ پرسیاری)")
-        print("      • 15 mixed questions for quick 20-minute daily practice sessions")
+        print("  [3] Quick Practice Sprint (تاقیکردنەوەی خێرای ١٥ پرسیاری)")
+        print("      • 15 mixed questions (Moderate + Tricky) for rapid 20-minute daily review sessions")
         print()
         print("  [Q] Exit Simulator")
         print()
         cprint("------------------------------------------------------------------------------------------", Colors.DIM)
         
-        choice = input(f"{Colors.BOLD}Enter Mode (1, 2, 3, 4, or Q) > {Colors.RESET}").strip().lower()
+        choice = input(f"{Colors.BOLD}Enter Mode (1, 2, 3, or Q) > {Colors.RESET}").strip().lower()
         
         if choice == '1':
             selected_qs = select_exam_questions(all_qs, mode=1)
-            run_exam_session(selected_qs, "Standard Moderate Exam (60 Questions)")
+            run_exam_session(selected_qs, "Unified Comprehensive Exam (Moderate + Hard/Tricky Combined)")
             break
         elif choice == '2':
             selected_qs = select_exam_questions(all_qs, mode=2)
-            run_exam_session(selected_qs, "Hard & Tricky Scenario Exam (60 Questions)")
+            run_exam_session(selected_qs, "Real Exam Recall Drill (60 Questions)")
             break
         elif choice == '3':
             selected_qs = select_exam_questions(all_qs, mode=3)
-            run_exam_session(selected_qs, "Real Exam Recall Drill (60 Questions)")
-            break
-        elif choice == '4':
-            selected_qs = select_exam_questions(all_qs, mode=4)
-            run_exam_session(selected_qs, "Quick Practice Sprint (15 Questions)", time_limit_minutes=25)
+            run_exam_session(selected_qs, "Quick Practice Sprint (15 Questions)", time_limit_minutes=20)
             break
         elif choice in ['q', 'exit', 'quit']:
             cprint("\nExiting Exam Simulator. Goodbye!", Colors.CYAN)
             break
         else:
-            cprint("Invalid choice, please select 1, 2, 3, 4, or Q.", Colors.RED)
+            cprint("Invalid choice, please select 1, 2, 3, or Q.", Colors.RED)
             time.sleep(1)
 
 if __name__ == '__main__':
