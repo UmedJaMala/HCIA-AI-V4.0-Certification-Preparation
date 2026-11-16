@@ -7,7 +7,7 @@
   <a href="./02_Question_Banks/"><img src="https://img.shields.io/badge/Question_Bank-900_Items-1F2937?style=flat&logo=gitbook&logoColor=10B981" alt="Question Bank: 900 Items" /></a>
   <a href="./01_Code_Mastery_Guide/"><img src="https://img.shields.io/badge/Code_Guide-70_Exam_Items-1F2937?style=flat&logo=python&logoColor=38BDF8" alt="Code Guide: 70 Exam Items" /></a>
   <a href="./03_HCIA-AI_Labs/"><img src="https://img.shields.io/badge/GullNas_Vision-PyTorch_ResNet50-1F2937?style=flat&logo=pytorch&logoColor=EE4C2C" alt="GullNas Vision: PyTorch ResNet50" /></a>
-  <a href="https://github.com/UmedJaMala/HCIA-AI-V4.0-Certification-Preparation/releases"><img src="https://img.shields.io/badge/Release-v1.2.0-1F2937?style=flat&logo=git&logoColor=A855F7" alt="Release: v1.2.0" /></a>
+  <a href="https://github.com/UmedJaMala/HCIA-AI-V4.0-Certification-Preparation/releases"><img src="https://img.shields.io/badge/Release-v1.3.0-1F2937?style=flat&logo=git&logoColor=A855F7" alt="Release: v1.3.0" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-1F2937?style=flat&logo=opensourceinitiative&logoColor=94A3B8" alt="License: MIT" /></a>
 </p>
 
@@ -69,7 +69,7 @@ Covers Python, MindSpore, TensorFlow, and PyTorch syntax frequently tested in fi
 <a id="question-banks"></a>
 ## 02. Question Banks (`02_Question_Banks/`)
 
-Contains **900 categorized, rigorously audited questions (v1.2)** across 6 curriculum modules and 3 comprehensive mock exams.
+Contains **900 categorized, rigorously audited questions (v1.3)** across 6 curriculum modules and 3 comprehensive mock exams.
 
 ### Master Editions (All 900 Questions in Single Volume)
 - `SOLVED` &nbsp; **Master Solved Direct Answers Edition (180 Pages)** &nbsp; <a href="https://raw.githubusercontent.com/UmedJaMala/HCIA-AI-V4.0-Certification-Preparation/main/02_Question_Banks/HCIA-AI_V4.0_Master_Question_Bank_Solved_Direct_Answers_900Q.pdf"><img src="https://img.shields.io/badge/Download_PDF-0284C7?style=flat" alt="Download PDF" /></a> <a href="./02_Question_Banks/HCIA-AI_V4.0_Master_Question_Bank_Solved_Direct_Answers_900Q.pdf"><img src="https://img.shields.io/badge/View_in_Repo-181717?style=flat&logo=github&logoColor=white" alt="View in Repo" /></a>  
