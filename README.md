@@ -9,13 +9,13 @@
   <a href="#simulator"><img src="https://img.shields.io/badge/Exam_Simulator-Pearson_VUE_CBT-1F2937?style=flat&logo=terminal&logoColor=10B981" alt="Exam Simulator" /></a>
   <a href="./04_AI_Generated_Summaries_Archive/"><img src="https://img.shields.io/badge/Question_Bank-900_Items-1F2937?style=flat&logo=gitbook&logoColor=38BDF8" alt="Question Bank: 900 Items" /></a>
   <a href="./05_Hands_on_Labs/"><img src="https://img.shields.io/badge/GullNas_Vision-PyTorch_ResNet50-1F2937?style=flat&logo=pytorch&logoColor=EE4C2C" alt="GullNas Vision: PyTorch ResNet50" /></a>
-  <a href="https://github.com/UmedJaMala/HCIA-AI-V4.0-Certification-Preparation/releases"><img src="https://img.shields.io/badge/Release-v1.3.0-1F2937?style=flat&logo=git&logoColor=A855F7" alt="Release: v1.3.0" /></a>
+  <a href="https://github.com/UmedJaMala/HCIA-AI-V4.0-Certification-Preparation/releases"><img src="https://img.shields.io/badge/Release-v2.0.0-1F2937?style=flat&logo=git&logoColor=A855F7" alt="Release: v2.0.0" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-1F2937?style=flat&logo=opensourceinitiative&logoColor=94A3B8" alt="License: MIT" /></a>
 </p>
 
 <p align="left">
   <a href="#simulator"><img src="https://img.shields.io/badge/Exam_Simulator-10B981?style=flat&logo=terminal&logoColor=white" alt="Exam Simulator" /></a>
-  <a href="#overview"><img src="https://img.shields.io/badge/Overview-21262D?style=flat" alt="Overview" /></a>
+  <a href="#overview"><img src="https://img.shields.io/badge/Overview_&_About-21262D?style=flat" alt="Overview & About" /></a>
   <a href="#structure"><img src="https://img.shields.io/badge/Structure-21262D?style=flat" alt="Structure" /></a>
   <a href="#official"><img src="https://img.shields.io/badge/01._Official_Courseware-21262D?style=flat" alt="Official Courseware" /></a>
   <a href="#recalls"><img src="https://img.shields.io/badge/02._Verified_Recalls-21262D?style=flat" alt="Verified Recalls" /></a>
@@ -29,11 +29,26 @@
 ---
 
 <a id="overview"></a>
-## Overview
+## Overview & About This Suite (Release v2.0.0)
 
-This repository is an organized, comprehensive, and student-focused preparation suite for the **Huawei HCIA-AI V4.0 Certification Exam (`H13-311_V4.0`)**. 
+This repository is an audited, production-grade, and student-focused preparation suite for the **Huawei HCIA-AI V4.0 Certification Exam (`H13-311_V4.0`)**. 
 
-Curated by **Umed Jamal Nouri** (Senior B.Sc. Electrical Engineering student at Salahaddin University – Erbil), this suite synthesizes official courseware, hands-on lab experiments, verified Pearson VUE exam recalls, and extensive question banks into a clean, intuitive structure designed to help candidates prepare methodically and pass the certification with confidence.
+Curated by **Umed Jamal Nouri** (Senior B.Sc. Electrical Engineering student at Salahaddin University – Erbil), this suite bridges the gap between academic theory, official courseware, and real-world certification testing. **Version 2.0.0** introduces verified slide reconciliation, authentic Pearson VUE candidate recalls, an interactive terminal CBT engine with instant slide citations, and dynamic self-grading answer sheets.
+
+### 🌟 Key Highlights & Capabilities (v2.0.0 Architecture):
+* **Single Source of Truth:** Grounded 100% in the official **473-slide Huawei curriculum** (`02_HCIA-AI_V4.0_Training_Material.pdf`), eliminating legacy V3.0 syllabus contamination (DaVinci Cube/Vector/Scalar units, CANN ATC/TBE compilers, MindSpore Graph pipelines).
+* **Authentic 41Q & 60Q Pearson VUE Recalls:** Directly sourced from recent successful test-takers, featuring step-by-step mathematical proofs, CNN feature map tracing ($[8,3,100,100] \to [8,32,48,48]$), and Pearson VUE deception traps.
+* **Master Slide Solutions Guide (`41Q_60Q_OFFICIAL_SLIDE_SOLUTIONS.md`):** Comprehensive 1,476-line markdown guide cross-referencing every single exam recall against exact slide numbers and verbatim Huawei definitions.
+* **Terminal Pearson VUE CBT Exam Simulator (`take_exam.py`):** Real-time 90-minute countdown, adaptive question interleaving, bookmarking/flagging (`F`), review grid (`R`), unanswered item jumps (`U`), and instant **`[S]` Slide Citation toggling** during examination sessions.
+* **Audited 904-Item Database (`exam_database.json`):** Corrects previous AI answer truncation bugs, providing fully verified multi-select combinations (`ABCD`, `ABC`, `AB`, `ABD`) and explicit slide citations.
+* **Printable Dynamic SOMA Bubble Answer Sheets:** 10-page printable OMR bubble sheets dynamically adapted row-by-row to Pearson VUE interleaved question types (Single Choice, True/False, Multiple Select, and Code Fill-in-the-Blank).
+* **Production Vision Web App (*GullNas Vision*):** Hands-on PyTorch ResNet-50 application achieving **90.20% accuracy** with sub-10ms inference latency on modern GPUs.
+
+> [!NOTE]
+> **GitHub Repository Metadata:**
+> * **About Description:** Official & verified preparation suite for Huawei HCIA-AI V4.0 (`H13-311_V4.0`) certification. Features 473 official slides, authentic 41Q/60Q Pearson VUE recalls with verbatim slide proofs, interactive terminal CBT exam simulator with `[S]` instant citations, 904-question audited database, and hands-on PyTorch ResNet-50 labs.
+> * **Website:** https://e.huawei.com/en/talent/
+> * **Repository Topics:** `huawei` · `hcia-ai` · `h13-311` · `h13-311-v4` · `pearson-vue` · `exam-simulator` · `deep-learning` · `machine-learning` · `pytorch` · `resnet50` · `mindspore` · `study-guide` · `question-bank`
 
 ${\color{#10B981}\textsf{\textbf{TIP}}}$ &nbsp;**Official Exam Specification (`H13-311_V4.0`):** 60 examination items (Single Choice, Multiple Choice, True/False) · 90-minute limit · Passing threshold: **600 / 1000 points** (60%).
 
