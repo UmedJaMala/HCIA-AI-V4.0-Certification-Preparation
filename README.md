@@ -45,8 +45,6 @@ The entire repository is structured strictly according to the **Recommended Stud
 ```text
 HCIA-AI/
 │
-├── take_exam.py                                                 <- 🚀 Interactive Pearson VUE Exam Simulator (Terminal CBT)
-│
 ├── 01_Course_Materials/                                         <- Phase 1: Foundations & Core Notes
 │   ├── 01_HCIA-AI_V4.0_Exam_Outline.pdf                         (Step 1: Exam objectives & domain weights)
 │   ├── 02_HCIA-AI_V4.0_Training_Material.pdf                    (Step 2: Official 473-slide curriculum)
@@ -78,14 +76,16 @@ HCIA-AI/
 │   ├── 01_HCIA-AI_V4.0_Code_Writing_Fill_in_the_Blank_Mastery_Guide.pdf (70 exam-format fill-in-the-blank items)
 │   └── 02_HCIA-AI_V4.0_Student_Answer_Sheets_Printable.pdf      (Printable 10-page grading grid)
 │
-└── 04_HCIA-AI_Labs/                                             <- Phase 4: Hands-on Experiments
-    ├── 01_Linear_Regression.ipynb
-    ├── 02_Linear_Regression_Expansion_Experiment.ipynb
-    ├── 03_Logistic_Regression.ipynb
-    ├── 04_Decision_Tree.ipynb
-    ├── 05_K-means_Clustering.ipynb
-    ├── 06_Deep_Learning_Lab_Guide.docx
-    └── Dataset/
+├── 04_HCIA-AI_Labs/                                             <- Phase 4: Hands-on Experiments
+│   ├── 01_Linear_Regression.ipynb
+│   ├── 02_Linear_Regression_Expansion_Experiment.ipynb
+│   ├── 03_Logistic_Regression.ipynb
+│   ├── 04_Decision_Tree.ipynb
+│   ├── 05_K-means_Clustering.ipynb
+│   ├── 06_Deep_Learning_Lab_Guide.docx
+│   └── Dataset/
+│
+└── take_exam.py                                                 <- 🚀 Phase 5: Interactive Pearson VUE Exam Simulator (Terminal CBT)
 ```
 
 ---
